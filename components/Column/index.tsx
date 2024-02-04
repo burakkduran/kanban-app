@@ -6,6 +6,7 @@ import {
   isTextDropItem,
   DropIndicator,
   useDragAndDrop,
+  Button,
 } from "react-aria-components";
 
 type ColumnProps = {
@@ -26,10 +27,10 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
     // Provide drag data in a custom format as well as plain text.
 
     getItems(keys) {
-        return Array.from(keys).map((id) => ({
-            "issue-id": String(id),
-            "text/plain": list.getItem(id).title,
-        }));
+      return Array.from(keys).map((id) => ({
+        "issue-id": String(id),
+        "text/plain": list.getItem(id).title,
+      }));
     },
 
     renderDropIndicator(target) {
@@ -105,7 +106,7 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
   });
 
   return (
-    <section className="flex flex-col gap-2 snap-center">
+    <section className="flex flex-col gap-2 snap-center  items-center">
       <header>
         <h3 className="font-semibold text-zinc-800 dark:text-zinc-200 my-0">
           {status}
@@ -121,12 +122,14 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
         selectionMode="multiple"
         dragAndDropHooks={dragAndDropHooks}
         renderEmptyState={() => "No tasks."}
-        className="h-[420px] p-2 md:p-4 overflow-y-auto overflow-x-hidden relative outline outline-0 bg-white/70 dark:bg-zinc-900/60 backdrop-blur border border-black/10 dark:border-white/10 bg-clip-padding text-gray-700 dark:text-zinc-400 flex flex-col gap-3 rounded-xl shadow-xl drop-target:bg-blue-200 dark:drop-target:bg-blue-800/60 drop-target:outline-2 outline-blue-500 forced-colors:outline-[Highlight] -outline-offset-2 empty:items-center empty:justify-center"
+        className="min-h-36 w-[300px]  p-2 md:p-4 outline outline-0 bg-white/70 dark:bg-zinc-900/60 backdrop-blur border border-black/10 dark:border-white/10 bg-clip-padding text-gray-700 dark:text-zinc-400 flex flex-col gap-3 rounded-xl shadow-xl drop-target:bg-blue-200 dark:drop-target:bg-blue-800/60 drop-target:outline-2 outline-blue-500 forced-colors:outline-[Highlight] -outline-offset-2 empty:items-center empty:justify-center"
       >
         {(item) => (
           <Card item={item} className={itemClassName} onDelete={deleteCard} />
         )}
       </GridList>
+      {/* Add Task Card */}
+      <Button className={"w-44 px-5 py-2 text-sm text-center transition rounded-lg border border-black/10 dark:border-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] dark:shadow-none cursor-default bg-gray-100 hover:bg-gray-200 pressed:bg-gray-300 text-gray-800 dark:bg-transparent dark:hover:bg-zinc-500 dark:pressed:bg-zinc-400 dark:text-zinc-100"} onPress={() => console.log(status)}>Add Card</Button>
     </section>
   );
 }

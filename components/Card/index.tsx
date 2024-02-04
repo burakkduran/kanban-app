@@ -23,7 +23,7 @@ export function Card({ id, item, className, onDelete }: CardProps) {
           onDelete(item.id);
         }}
       >
-        ✎
+        X
       </Button>
 
       <Text

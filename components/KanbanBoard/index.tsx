@@ -10,8 +10,8 @@ export default function KanbanBoard() {
   });
 
   return (
-    <div className="w-[992px]">
-      <div className="grid grid-cols-[repeat(3,minmax(280px,1fr))] md:justify-center gap-4 -mx-8 px-8 py-8 overflow-auto relative snap-x snap-mandatory no-scrollbar">
+    <div className="min-h-screen">
+      <div className="flex md:justify-center gap-4 px-8 py-8 overflow-auto no-scrollbar">
         <Column
           status="Open"
           list={list}
@@ -20,7 +20,7 @@ export default function KanbanBoard() {
         <Column
           status="In Progress"
           list={list}
-          itemClassName="selected:bg-blue-100 selected:border-blue-500 dark:selected:bg-blue-900 dark:selected:border-blue-700"
+          itemClassName="selected:bg-yellow-100 selected:border-yellow-500 dark:selected:bg-yellow-900 dark:selected:border-yellow-700"
         />
         <Column
           status="Closed"
