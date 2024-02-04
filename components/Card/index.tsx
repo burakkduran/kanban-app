@@ -1,5 +1,4 @@
 import { todos } from "@/store/initialData";
-
 import { GridListItem, Button, Text } from "react-aria-components";
 import { Icon } from "@adobe/react-spectrum";
 
@@ -42,14 +41,12 @@ export function Card({ id, item, className, onDelete }: CardProps) {
 
       <Text
         slot="description"
-        className="text-sm line-clamp-2 col-span-2 text-slate-500 dark:text-zinc-300 forced-colors:!text-inherit"
+        className="text-sm  text-slate-500 dark:text-zinc-300 forced-colors:!text-inherit"
       >
         {item.description}
       </Text>
-      <span className="flex ">
-        <span className="text-sm">2023-09-15</span>
-      </span>
-      <span>
+   
+      <span className="justify-self-end self-end">
         <Button
           slot="drag"
           className="bg-transparent border-none text-gray-500 dark:text-zinc-300 text-base leading-none w-fit aspect-square p-0 justify-self-end outline outline-0 focus-visible:outline-2 outline-blue-500 forced-colors:outline-[Highlight] rounded-sm sr-only group-focus-visible:not-sr-only focus:not-sr-only forced-colors:group-selected:text-[HighlightText] forced-colors:group-selected:outline-[HighlightText]"
