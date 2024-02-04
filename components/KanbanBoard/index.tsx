@@ -10,7 +10,7 @@ export default function KanbanBoard() {
   });
 
   return (
-    <div>
+    <div className="w-[992px]">
       <div className="grid grid-cols-[repeat(3,minmax(280px,1fr))] md:justify-center gap-4 -mx-8 px-8 py-8 overflow-auto relative snap-x snap-mandatory no-scrollbar">
         <Column
           status="Open"
