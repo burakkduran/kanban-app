@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useListData } from "react-stately";
 import { todos } from "@/store/initialData";
@@ -8,6 +8,7 @@ export default function KanbanBoard() {
   const list = useListData({
     initialItems: todos,
   });
+
 
   return (
     <div className="min-h-screen">

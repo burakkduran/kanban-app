@@ -1,6 +1,8 @@
 import { ListData } from "react-stately";
 import { todos } from "@/store/initialData";
 import { Card } from "@/components/Card";
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   GridList,
   isTextDropItem,
@@ -21,6 +23,17 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
 
   function deleteCard(id: string) {
     list.remove(id);
+  }
+
+
+  function addCard(status: string) {
+    const id = uuidv4();
+    list.append({
+      title: "Add Task",
+      id: id,
+      status: status,
+    });
+    console.log(list.items);
   }
 
   const { dragAndDropHooks } = useDragAndDrop({
@@ -134,7 +147,9 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
           className={
             "w-full px-5 py-2 text-sm text-center transition rounded-lg rounded-t-none border border-black/10 dark:border-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] dark:shadow-none cursor-default bg-gray-100 hover:bg-gray-200 pressed:bg-gray-300 text-gray-800 dark:bg-transparent dark:hover:bg-zinc-500 dark:pressed:bg-zinc-400 dark:text-zinc-100"
           }
-          onPress={() => console.log(status)}
+          onPress={() => {
+            addCard(status);
+          }}
         >
           Add Card
         </Button>
