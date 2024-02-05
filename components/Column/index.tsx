@@ -1,7 +1,7 @@
 import { ListData } from "react-stately";
 import { todos } from "@/store/initialData";
 import { Card } from "@/components/Card";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 import {
   GridList,
@@ -10,6 +10,7 @@ import {
   useDragAndDrop,
   Button,
 } from "react-aria-components";
+import { View } from "@adobe/react-spectrum";
 
 type ColumnProps = {
   list: ListData<(typeof todos)[0]>;
@@ -25,7 +26,6 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
     list.remove(id);
   }
 
-
   function addCard(status: string) {
     const id = uuidv4();
     list.append({
@@ -37,11 +37,9 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
   }
 
   const { dragAndDropHooks } = useDragAndDrop({
-    // Provide drag data in a custom format as well as plain text.
-
     getItems(keys) {
       return Array.from(keys).map((id) => ({
-        "issue-id": String(id),
+        "task-id": String(id),
         "text/plain": list.getItem(id).title,
       }));
     },
@@ -76,17 +74,11 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
         </DropIndicator>
       );
     },
-
-    // Accept drops with the custom format.
-    acceptedDragTypes: ["issue-id"],
-
-    // Ensure items are always moved rather than copied.
+    acceptedDragTypes: ["task-id"],
     getDropOperation: () => "move",
-
-    // Handle drops between items from other lists.
     async onInsert(e) {
       const ids = await Promise.all(
-        e.items.filter(isTextDropItem).map((item) => item.getText("issue-id"))
+        e.items.filter(isTextDropItem).map((item) => item.getText("task-id"))
       );
       for (const id of ids) {
         list.update(id, { ...list.getItem(id), status });
@@ -97,18 +89,14 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
         list.moveAfter(e.target.key, ids);
       }
     },
-
-    // Handle drops on the collection when empty.
     async onRootDrop(e) {
       const ids = await Promise.all(
-        e.items.filter(isTextDropItem).map((item) => item.getText("issue-id"))
+        e.items.filter(isTextDropItem).map((item) => item.getText("task-id"))
       );
       for (const id of ids) {
         list.update(id, { ...list.getItem(id), status });
       }
     },
-
-    // Handle reordering items within the same list.
     onReorder(e) {
       if (e.target.dropPosition === "before") {
         list.moveBefore(e.target.key, e.keys);

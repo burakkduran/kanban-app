@@ -40,7 +40,6 @@ export function Card({ id, item, className, onDelete }: CardProps) {
         >
           <Trash2 size={16} />
         </Button>
-
       </span>
     </GridListItem>
   );
