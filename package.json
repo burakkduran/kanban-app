@@ -19,6 +19,7 @@
     "react-aria-components": "^1.0.1",
     "react-dom": "^18",
     "react-stately": "^3.29.1",
+    "tailwindcss-animate": "^1.0.7",
     "tailwindcss-react-aria-components": "^1.0.0",
     "uuid": "^9.0.1"
   },

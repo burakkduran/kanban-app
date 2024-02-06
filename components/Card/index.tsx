@@ -2,6 +2,7 @@ import { todos } from "@/store/initialData";
 import { GridListItem, Button, TextArea } from "react-aria-components";
 import { Check, Pencil, Trash2 } from "lucide-react";
 import { useState, useRef } from "react";
+import CardDeleteModal from "../CardDeleteModal";
 
 type CardProps = {
   id?: string;
@@ -78,14 +79,7 @@ export function Card({ id, item, className, onDelete, onEdit }: CardProps) {
             >
               <Pencil size={16} />
             </Button>
-            <Button
-              aria-label="Delete Task"
-              onPress={() => {
-                onDelete(item.id);
-              }}
-            >
-              <Trash2 size={16} />
-            </Button>
+            <CardDeleteModal onDelete={onDelete} item={item} />
           </span>
         </div>
       )}

@@ -1,64 +1,89 @@
 "use client";
 
-import { Button, TextArea } from "react-aria-components";
-import { useState, useRef } from "react";
-import { Check, Pencil } from "lucide-react";
+import { AlertCircle } from "lucide-react";
+import {
+  Button,
+  Dialog,
+  DialogTrigger,
+  Heading,
+  Modal,
+  ModalOverlay,
+} from "react-aria-components";
+
+function ModalExample() {
+  return (
+    <div>
+      <DialogTrigger>
+        <Button className="inline-flex items-center justify-center rounded-md bg-black bg-opacity-20 bg-clip-padding border border-white/20 px-3.5 py-2 font-medium font-[inherit] text-base text-white hover:bg-opacity-30 pressed:bg-opacity-40 transition-colors cursor-default outline-none focus-visible:ring-2 focus-visible:ring-white/75">
+          Delete…
+        </Button>
+        <ModalOverlay
+          className={({ isEntering, isExiting }) => `
+          fixed inset-0 z-10 overflow-y-auto bg-black/25 dark:bg-zinc-900/70 flex min-h-full items-center justify-center p-4 text-center backdrop-blur
+          ${isEntering ? "animate-in fade-in duration-300 ease-out" : ""}
+          ${isExiting ? "animate-out fade-out duration-200 ease-in" : ""}
+        `}
+        >
+          <Modal
+            className={({ isEntering, isExiting }) => `
+            w-full max-w-md overflow-hidden rounded-2xl bg-white dark:bg--800 p-6 text-left align-middle shadow-xl
+            ${isEntering ? "animate-in zoom-in-95 ease-out duration-300" : ""}
+            ${isExiting ? "animate-out zoom-out-95 ease-in duration-200" : ""}
+          `}
+          >
+            <Dialog role="alertdialog" className="outline-none relative">
+              {({ close }) => (
+                <>
+                  <Heading
+                    slot="title"
+                    className="text-2xl font-semibold leading-6 my-0 text-slate-700 dark:text-slate-200"
+                  >
+                    Delete folder
+                  </Heading>
+                  <div className="w-6 h-6 text-red-500 absolute right-0 top-0 stroke-2">
+                    <AlertCircle />
+                  </div>
+                  <p className="mt-3 text-slate-500 dark:text-slate-300">
+                    Are you sure you want to delete Documents? All contents will
+                    be permanently destroyed.
+                  </p>
+                  <div className="mt-6 flex justify-end gap-2">
+                    <DialogButton
+                      className="bg-slate-200 text-slate-800 hover:border-slate-300 pressed:bg-slate-300"
+                      onPress={close}
+                    >
+                      Cancel
+                    </DialogButton>
+                    <DialogButton
+                      className="bg-red-500 text-white hover:border-red-600 pressed:bg-red-600"
+                      onPress={close}
+                    >
+                      Delete
+                    </DialogButton>
+                  </div>
+                </>
+              )}
+            </Dialog>
+          </Modal>
+        </ModalOverlay>
+      </DialogTrigger>
+    </div>
+  );
+}
+
+function DialogButton({ className, ...props }: any) {
+  return (
+    <Button
+      {...props}
+      className={`inline-flex justify-center rounded-md border border-solid border-transparent px-5 py-2 font-semibold font-[inherit] text-base transition-colors cursor-default outline-none focus-visible:ring-2 ring-blue-500 ring-offset-2 ${className}`}
+    />
+  );
+}
 
 export default function Example() {
-  const [editable, setEditable] = useState(false);
-  const [title, setTitle] = useState("Edit here");
-
-
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTitle(e.target.value);
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-    }
-  };
-
   return (
-    <main className="flex justify-center p-2">
-      <div className="min-h-10 w-[294px] items-center p-2 rounded-lg border border-solid border-black/10 hover:border-black/20 dark:border-white/10 dark:hover:border-white/20 forced-colors:!border-[ButtonBorder] bg-white/80 dark:bg-zinc-900/70 bg-clip-padding hover:shadow-md selected:shadow-md dragging:opacity-50 transition text-slate-700 dark:text-slate-200 cursor-default select-none outline outline-0 outline-offset-2 focus-visible:outline-2 outline-blue-500 forced-colors:outline-[Highlight] forced-colors:!text-[ButtonText] forced-colors:selected:!bg-[Highlight] forced-colors:selected:!text-[HighlightText] forced-color-adjust-none ">
-        {editable ? (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setEditable(!editable);
-            }}
-            className="flex justify-between items-center w-full gap-2"
-          >
-            <TextArea
-              value={title}
-              rows={3}
-              onChange={handleTextareaChange}
-              className="w-full px-2 py-1 text-sm rounded-lg border border-black/10 dark:border-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] dark:shadow-none bg-gray-100 focus:bg-zinc-200 dark:bg-transparent dark:focus:bg-zinc-800 text-gray-800 dark:text-slate-200 focus:outline-none overflow-hidden"
-              ref={textareaRef}
-            />
-            <Button
-              onPress={() => {
-                setEditable(!editable);
-              }}
-            >
-              <Check size={16} />
-            </Button>
-          </form>
-        ) : (
-          <div className="flex justify-between items-center">
-            <span className="break-words w-56 text-sm font-normal">
-              {title}
-            </span>
-            <Button
-              onPress={() => {
-                setEditable(!editable);
-              }}
-            >
-              <Pencil size={16} />
-            </Button>
-          </div>
-        )}
-      </div>
+    <main className="flex justify-center">
+      <ModalExample />
     </main>
   );
 }

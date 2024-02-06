@@ -32,7 +32,7 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
   function addCard(status: string) {
     const id = uuidv4();
     list.append({
-      title: "Add Task",
+      title: "Edit me!",
       id: id,
       status: status,
     });
