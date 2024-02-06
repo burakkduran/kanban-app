@@ -10,7 +10,6 @@ import {
   useDragAndDrop,
   Button,
 } from "react-aria-components";
-import { View } from "@adobe/react-spectrum";
 
 type ColumnProps = {
   list: ListData<(typeof todos)[0]>;
@@ -26,6 +25,10 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
     list.remove(id);
   }
 
+  function onEdit(id: string, title: string) {
+    list.update(id, { ...list.getItem(id), title });
+  }
+
   function addCard(status: string) {
     const id = uuidv4();
     list.append({
@@ -33,7 +36,6 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
       id: id,
       status: status,
     });
-    console.log(list.items);
   }
 
   const { dragAndDropHooks } = useDragAndDrop({
@@ -126,7 +128,7 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
         className="min-h-36 w-[320px] p-1 md:p-3 outline outline-0 bg-white/70 dark:bg-zinc-900/60 backdrop-blur border border-black/10 dark:border-white/10 bg-clip-padding text-gray-700 dark:text-zinc-400 flex flex-col gap-3 rounded-xl rounded-b-none shadow-xl drop-target:bg-blue-200 dark:drop-target:bg-blue-800/60 drop-target:outline-2 outline-blue-500 forced-colors:outline-[Highlight] -outline-offset-2 empty:items-center empty:justify-center"
       >
         {(item) => (
-          <Card item={item} className={itemClassName} onDelete={deleteCard} />
+          <Card item={item} className={itemClassName} onDelete={deleteCard} onEdit={onEdit} />
         )}
       </GridList>
       {/* Add Task Card */}
