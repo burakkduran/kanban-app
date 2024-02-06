@@ -19,5 +19,6 @@ const config: Config = {
     require("tailwindcss-react-aria-components"),
     require("tailwindcss-animate"),
   ],
+  darkMode: "class",
 };
 export default config;
