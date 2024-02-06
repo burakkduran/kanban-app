@@ -109,9 +109,9 @@ export function Column({ list, status, itemClassName }: ColumnProps) {
   });
 
   return (
-    <section className="flex flex-col gap-2 snap-center  items-center">
+    <section className="flex flex-col gap-2 snap-center ">
       <header>
-        <h3 className="font-semibold text-zinc-800 dark:text-zinc-200 my-0">
+        <h3 className="font-semibold text-2xl text-left text-zinc-800 dark:text-zinc-200 my-0">
           {status}
         </h3>
         <span className="text-sm text-zinc-700 dark:text-zinc-400">

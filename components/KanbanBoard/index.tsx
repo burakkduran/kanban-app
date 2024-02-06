@@ -12,7 +12,7 @@ export default function KanbanBoard() {
 
   return (
     <div className="min-h-screen">
-      <div className="flex md:justify-center gap-4 px-8 py-8 overflow-auto no-scrollbar">
+      <div className="flex md:justify-center gap-4 px-8 py-8 overflow-auto">
         <Column
           status="Open"
           list={list}
