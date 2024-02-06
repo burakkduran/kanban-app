@@ -11,8 +11,7 @@ export default function KanbanBoard() {
 
 
   return (
-    <div>
-      <div className="flex md:justify-center gap-4 px-8 py-8 overflow-auto">
+      <div className="flex justify-between gap-4 md:gap-8 py-8 overflow-auto w-full">
         <Column
           status="Open"
           list={list}
@@ -29,6 +28,5 @@ export default function KanbanBoard() {
           itemClassName="selected:bg-red-100 selected:border-red-500 dark:selected:bg-red-900 dark:selected:border-red-700 "
         />
       </div>
-    </div>
   );
 }
