@@ -1,5 +1,5 @@
 import { todos } from "@/store/initialData";
-import { GridListItem, Button, TextArea } from "react-aria-components";
+import { GridListItem, Button } from "react-aria-components";
 import CardDeleteModal from "../CardDeleteModal";
 import CardEditModal from "../CardEditModal";
 
